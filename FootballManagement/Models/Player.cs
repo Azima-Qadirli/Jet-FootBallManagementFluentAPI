@@ -4,7 +4,7 @@ using FootballManagement.Models;
 
 public class Player
 {
-    [Key]
+    public int Id { get; set; }
     public int FormNumber { get; set; }
 
     [MaxLength(50)]
@@ -14,7 +14,5 @@ public class Player
 
     [ForeignKey("Team")]
     public int TeamId { get; set; }
-
-    //[InverseProperty("FootballPlayers")]
     public Team Team { get; set; }
 }

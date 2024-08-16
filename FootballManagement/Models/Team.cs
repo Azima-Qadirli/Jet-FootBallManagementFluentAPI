@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FootballManagement.Models;
 
@@ -14,8 +15,12 @@ public class Team
     public int NumberOfGoalsScored { get; set; }
     public int NumberOfGoalsConceded { get; set; }
     
-    public ICollection<Player>Players { get; set; }
-    //public ICollection<Game>HomeGames { get; set; }
-    //public ICollection<Game>GuestGames { get; set; }
+    public ICollection<Player> Players { get; set; }
+    [NotMapped]
+    [InverseProperty("HomeTeam")]
+    public ICollection<Game> HomeGames { get; set; }
+    [NotMapped]
+    [InverseProperty("GuestTeam")]
+    public ICollection<Game>GuestGames { get; set; }
     
 }

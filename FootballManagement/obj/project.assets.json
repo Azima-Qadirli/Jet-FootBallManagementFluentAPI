@@ -4068,27 +4068,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\test\\.nuget\\packages\\": {}
+    "/Users/nicat/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\test\\OneDrive\\Desktop\\c# Jet\\FootballManagement\\FootballManagement\\FootballManagement.csproj",
+      "projectUniqueName": "/Users/nicat/Desktop/test/Jet-FootBallManagementFluentAPI/FootballManagement/FootballManagement.csproj",
       "projectName": "FootballManagement",
-      "projectPath": "C:\\Users\\test\\OneDrive\\Desktop\\c# Jet\\FootballManagement\\FootballManagement\\FootballManagement.csproj",
-      "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\test\\OneDrive\\Desktop\\c# Jet\\FootballManagement\\FootballManagement\\obj\\",
+      "projectPath": "/Users/nicat/Desktop/test/Jet-FootBallManagementFluentAPI/FootballManagement/FootballManagement.csproj",
+      "packagesPath": "/Users/nicat/.nuget/packages/",
+      "outputPath": "/Users/nicat/Desktop/test/Jet-FootBallManagementFluentAPI/FootballManagement/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/nicat/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4138,7 +4135,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
