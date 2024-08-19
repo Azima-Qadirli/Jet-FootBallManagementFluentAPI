@@ -11,11 +11,9 @@ public class Game
     public int HomeTeamCode { get; set; }
     [ForeignKey("GuestTeam")]
     public int GuestTeamCode { get; set; }
-    
     public int GoalsOfHomeTeam { get; set; }
     public int GoalsOfGuestTeam { get; set; }
-    [NotMapped]
+    
     public Team HomeTeam { get; set; }
-    [NotMapped]
     public Team GuestTeam { get; set; }
 }

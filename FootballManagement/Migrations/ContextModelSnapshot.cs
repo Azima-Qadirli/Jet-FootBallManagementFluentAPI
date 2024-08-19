@@ -46,6 +46,10 @@ namespace FootballManagement.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GuestTeamCode");
+
+                    b.HasIndex("HomeTeamCode");
+
                     b.ToTable("Games");
                 });
 
@@ -111,6 +115,25 @@ namespace FootballManagement.Migrations
                     b.ToTable("Players");
                 });
 
+            modelBuilder.Entity("FootballManagement.Models.Game", b =>
+                {
+                    b.HasOne("FootballManagement.Models.Team", "GuestTeam")
+                        .WithMany("GuestGames")
+                        .HasForeignKey("GuestTeamCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FootballManagement.Models.Team", "HomeTeam")
+                        .WithMany("HomeGames")
+                        .HasForeignKey("HomeTeamCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GuestTeam");
+
+                    b.Navigation("HomeTeam");
+                });
+
             modelBuilder.Entity("Player", b =>
                 {
                     b.HasOne("FootballManagement.Models.Team", "Team")
@@ -124,6 +147,10 @@ namespace FootballManagement.Migrations
 
             modelBuilder.Entity("FootballManagement.Models.Team", b =>
                 {
+                    b.Navigation("GuestGames");
+
+                    b.Navigation("HomeGames");
+
                     b.Navigation("Players");
                 });
 #pragma warning restore 612, 618

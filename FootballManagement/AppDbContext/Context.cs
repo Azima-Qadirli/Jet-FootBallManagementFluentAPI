@@ -11,7 +11,7 @@ public class Context:DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=DESKTOP-UM6TF1M;Database=FMS;Integrated Security = true;Encrypt=False;");
+        optionsBuilder.UseSqlServer("Server=localhost;Database=FMS;User Id = sa;Password = DB_Password;Integrated Security = true;Encrypt=False;Trusted_Connection = false ");
         base.OnConfiguring(optionsBuilder);
     }
 

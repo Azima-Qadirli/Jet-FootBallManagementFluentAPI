@@ -7,12 +7,12 @@ namespace FootballManagement.Services;
 
 public class TeamService
 {
-    private static Context context = new();
+    private readonly Context _context = new();
 
     public void TeamAdd(Team team)
     {
-        context.Teams.Add(team);
-        context.SaveChanges();
+        _context.Teams.Add(team);
+        _context.SaveChanges();
     }
 
     public Team GetTeam(int id)
@@ -29,7 +29,8 @@ public class TeamService
 
     public List<Team> GetAll()
     {
-        List<Team> teams = [..context.Teams];
+        // List<Team> teams = [.._context.Teams];
+        List<Team> teams = _context.Teams.ToList();
         if (teams.Count > 0)
             return teams;
         else
@@ -41,16 +42,16 @@ public class TeamService
     public void TeamRemove(int id)
     {
         Team team = GetTeam(id);
-        context.Teams.Remove(team);
-        context.SaveChanges();
+        _context.Teams.Remove(team);
+        _context.SaveChanges();
     }
 
     public void TeamUpdate(int id, string newTeamName)
     {
         Team team = GetTeam(id);
         team.TeamName = newTeamName;
-        context.Teams.Update(team);
-        context.SaveChanges();
+        _context.Teams.Update(team);
+        _context.SaveChanges();
     }
 
     public void TeamUpdate(int id, Team UpdatedTeam)
@@ -61,7 +62,7 @@ public class TeamService
         team.NumberOfEquality = UpdatedTeam.NumberOfEquality;
         team.NumberOfGoalsConceded = UpdatedTeam.NumberOfGoalsConceded;
         team.NumberOfGoalsScored = UpdatedTeam.NumberOfGoalsScored;
-        context.Teams.Update(team);
-        context.SaveChanges();
+        _context.Teams.Update(team);
+        _context.SaveChanges();
     }
 }

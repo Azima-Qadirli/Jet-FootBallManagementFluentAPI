@@ -14,12 +14,10 @@ public class Team
     public int NumberOfDefeat { get; set; }
     public int NumberOfGoalsScored { get; set; }
     public int NumberOfGoalsConceded { get; set; }
-    
     public ICollection<Player> Players { get; set; }
-    [NotMapped]
+    
     [InverseProperty("HomeTeam")]
     public ICollection<Game> HomeGames { get; set; }
-    [NotMapped]
     [InverseProperty("GuestTeam")]
     public ICollection<Game>GuestGames { get; set; }
     

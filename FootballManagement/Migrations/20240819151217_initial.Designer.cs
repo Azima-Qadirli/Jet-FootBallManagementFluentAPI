@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballManagement.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240816115101_updatedPlayerTable")]
-    partial class updatedPlayerTable
+    [Migration("20240819151217_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,34 @@ namespace FootballManagement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("FootballManagement.Models.Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GoalsOfGuestTeam")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoalsOfHomeTeam")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GuestTeamCode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HomeTeamCode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Games");
+                });
 
             modelBuilder.Entity("FootballManagement.Models.Team", b =>
                 {
@@ -59,11 +87,14 @@ namespace FootballManagement.Migrations
 
             modelBuilder.Entity("Player", b =>
                 {
-                    b.Property<int>("FormNumber")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FormNumber"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FormNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -76,9 +107,27 @@ namespace FootballManagement.Migrations
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
 
-                    b.HasKey("FormNumber");
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("Player", b =>
+                {
+                    b.HasOne("FootballManagement.Models.Team", "Team")
+                        .WithMany("Players")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("FootballManagement.Models.Team", b =>
+                {
+                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

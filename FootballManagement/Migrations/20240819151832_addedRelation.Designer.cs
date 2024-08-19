@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballManagement.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240816121225_updatedTeamTable")]
-    partial class updatedTeamTable
+    [Migration("20240819151832_addedRelation")]
+    partial class addedRelation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,6 +48,10 @@ namespace FootballManagement.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GuestTeamCode");
+
+                    b.HasIndex("HomeTeamCode");
 
                     b.ToTable("Games");
                 });
@@ -87,11 +91,14 @@ namespace FootballManagement.Migrations
 
             modelBuilder.Entity("Player", b =>
                 {
-                    b.Property<int>("FormNumber")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FormNumber"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FormNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -104,24 +111,49 @@ namespace FootballManagement.Migrations
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
 
-                    b.HasKey("FormNumber");
+                    b.HasKey("Id");
 
                     b.HasIndex("TeamId");
 
                     b.ToTable("Players");
                 });
 
+            modelBuilder.Entity("FootballManagement.Models.Game", b =>
+                {
+                    b.HasOne("FootballManagement.Models.Team", "GuestTeam")
+                        .WithMany("GuestGames")
+                        .HasForeignKey("GuestTeamCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FootballManagement.Models.Team", "HomeTeam")
+                        .WithMany("HomeGames")
+                        .HasForeignKey("HomeTeamCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GuestTeam");
+
+                    b.Navigation("HomeTeam");
+                });
+
             modelBuilder.Entity("Player", b =>
                 {
-                    b.HasOne("FootballManagement.Models.Team", null)
+                    b.HasOne("FootballManagement.Models.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("FootballManagement.Models.Team", b =>
                 {
+                    b.Navigation("GuestGames");
+
+                    b.Navigation("HomeGames");
+
                     b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
