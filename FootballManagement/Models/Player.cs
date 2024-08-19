@@ -5,6 +5,7 @@ using FootballManagement.Models;
 public class Player
 {
     public int Id { get; set; }
+    [Range(1,99)]
     public int FormNumber { get; set; }
 
     [MaxLength(50)]

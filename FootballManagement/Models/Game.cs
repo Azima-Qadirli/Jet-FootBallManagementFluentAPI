@@ -14,7 +14,8 @@ public class Game
     
     public int GoalsOfHomeTeam { get; set; }
     public int GoalsOfGuestTeam { get; set; }
-    
+    [NotMapped]
     public Team HomeTeam { get; set; }
+    [NotMapped]
     public Team GuestTeam { get; set; }
 }

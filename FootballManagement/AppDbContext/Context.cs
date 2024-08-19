@@ -8,6 +8,7 @@ public class Context:DbContext
     public DbSet<Team>Teams { get; set; }
     public DbSet<Player>Players { get; set; }
     public DbSet<Game>Games { get; set; }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer("Server=DESKTOP-UM6TF1M;Database=FMS;Integrated Security = true;Encrypt=False;");
